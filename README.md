@@ -1,110 +1,124 @@
-# Terraform AWS EC2 User Data Demo
+# Terraform AWS EC2 User Data Demo 🚀
 
-A hands-on Infrastructure as Code (IaC) project demonstrating how Terraform can provision AWS networking resources and an EC2 instance, with User Data automating Nginx installation during instance startup.
+This project demonstrates how to provision AWS infrastructure using Terraform and automatically install and start an Nginx web server on an EC2 instance using a User Data script.
 
-## Architecture
+## Project Overview
 
-Terraform configuration describes these AWS resources:
+The project covers the basic infrastructure required to host a public web server on AWS. Terraform configuration is used to define networking resources and an EC2 instance, while User Data automates the initial server setup during instance launch.
 
-* Custom VPC
+## Architecture and Features
+
+* Custom Amazon VPC
 * Public subnet
 * Internet Gateway
 * Route table and route association
-* Security group
-* EC2 instance
-* User Data script for Nginx installation
-* Terraform outputs, including the instance's public IP
+* Security group for required network traffic
+* EC2 instance provisioning with Terraform
+* User Data automation for Nginx installation and startup
+* Terraform outputs, including the instance public IP
 
 ## Technology Stack
 
-* AWS EC2 and VPC
-* Terraform
-* Nginx
-* Git and GitHub
+* **Cloud:** AWS
+* **Infrastructure as Code:** Terraform
+* **Web Server:** Nginx
+* **Version Control:** Git and GitHub
 
 ## Repository Structure
 
 ```text
 terraform-aws-ec2-userdata-demo/
+├── .gitignore
+├── README.md
 ├── main.tf
 ├── variables.tf
-├── outputs.tf
-├── .gitignore
-└── README.md
+└── outputs.tf
 ```
 
 ## Prerequisites
 
-* Terraform CLI
-* AWS CLI
-* An AWS account and appropriately configured AWS credentials
-* An AWS Region where the required resources are available
+* An AWS account
+* Terraform CLI installed
+* AWS CLI configured with appropriate credentials
+* IAM permissions required to create and manage the project's resources
 
-Use an IAM identity with only the permissions needed for this project. Do not commit AWS access keys or other credentials to GitHub.
+Never commit AWS access keys, secret keys, or other credentials to GitHub.
 
-## Deploy
+## Deployment Steps
 
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/akshayshendurkar55-dot/terraform-aws-ec2-userdata-demo.git
 cd terraform-aws-ec2-userdata-demo
 ```
 
-Initialize and validate Terraform:
+### 2. Initialize Terraform
 
 ```bash
 terraform init
-terraform fmt -check
+```
+
+### 3. Format and validate the configuration
+
+```bash
+terraform fmt
 terraform validate
+```
+
+### 4. Review the deployment plan
+
+```bash
 terraform plan
 ```
 
-Review the plan carefully before deciding whether to create resources.
+Review the resources and estimated costs before proceeding.
 
-To deploy, only when you are ready and have checked the estimated cost:
+### 5. Deploy the infrastructure
 
 ```bash
 terraform apply
 ```
 
-If deployment succeeds, inspect the outputs:
+Only confirm the operation after reviewing the plan and deciding that you are ready to incur any applicable AWS charges.
+
+### 6. View Terraform outputs
 
 ```bash
 terraform output
 ```
 
-The Nginx page can be tested using the public IP output if the instance, security group, and network configuration allow HTTP traffic.
+If deployment succeeds and the network and security group permit HTTP traffic, use the public IP output to test the Nginx web page in your browser.
 
 ## Security Considerations
 
-* Restrict SSH access to your own IP address instead of exposing port 22 to everyone.
-* Allow only the inbound traffic required for the demonstration.
-* Avoid embedding credentials in Terraform files or User Data.
-* Review the security group rules and Terraform plan before deployment.
+* Restrict SSH access to your own IP address instead of allowing access from anywhere.
+* Permit only the inbound traffic needed for the project.
+* Use least-privilege IAM permissions.
+* Do not store credentials in Terraform files or User Data scripts.
 
-## Cost and Cleanup
+## AWS Cost Awareness and Cleanup
 
-**AWS resources may incur charges.** EC2 instances, storage, public IPv4 addresses, and other resources may be billable depending on their configuration and current AWS pricing.
+AWS resources may incur charges depending on their configuration, region, and current pricing. EC2, storage, and public IPv4 addresses are examples of resources that may generate costs.
 
-When you have finished testing, inspect the resources managed by this Terraform configuration. If you intend to remove them, confirm that doing so is safe and then run:
+When finished testing, review the resources managed by this Terraform configuration. If it is safe to remove them, run:
 
 ```bash
 terraform destroy
 ```
 
-Review the destruction plan before confirming. Also check the AWS Console and Billing dashboard for any remaining resources or charges. Stopping an instance does not necessarily eliminate every cost.
+Review the destruction plan before confirming. Afterwards, check the AWS Console and Billing dashboard for remaining resources and charges. Stopping an EC2 instance alone may not eliminate every cost.
 
 ## Learning Outcomes
 
-* Defining AWS infrastructure with Terraform
-* Understanding the relationship between VPC, subnet, routing, and security groups
-* Provisioning an EC2 instance
-* Automating initial server configuration with User Data
-* Reviewing infrastructure plans and cleaning up resources responsibly
+* Understanding Infrastructure as Code with Terraform
+* Learning how VPCs, subnets, gateways, route tables, and security groups work together
+* Provisioning EC2 infrastructure
+* Automating server setup with EC2 User Data
+* Reviewing deployment plans and cleaning up AWS resources responsibly
 
 ## Author
 
-Laxmikant Shendurkar
+**Laxmikant Shendurkar**
 
 Cloud Computing and DevOps Learning Projects
